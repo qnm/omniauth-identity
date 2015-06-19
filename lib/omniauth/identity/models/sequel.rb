@@ -15,6 +15,8 @@ module OmniAuth
 
             has_secure_password
 
+            alias persisted? exists?
+
             def self.auth_key=(key)
               super
               validates_uniqueness_of :key
