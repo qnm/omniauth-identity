@@ -19,7 +19,7 @@ describe(OmniAuth::Identity::Models::Sequel, :db => true) do
   end
 
   it 'should delegate locate to the all query method' do
-    SequelTestIdentity.should_receive(:first).with('ham_sandwich' => 'open faced', 'category' => 'sandwiches').and_return('wakka')
+    SequelTestIdentity.should_receive(:first).with(:ham_sandwich => 'open faced', :category => 'sandwiches').and_return('wakka')
     SequelTestIdentity.locate('ham_sandwich' => 'open faced', 'category' => 'sandwiches').should == 'wakka'
   end
 end

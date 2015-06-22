@@ -15,6 +15,8 @@ module OmniAuth
 
             has_secure_password
 
+            attr_accessor :password_confirmation
+
             alias persisted? exists?
 
             def self.auth_key=(key)
@@ -23,7 +25,11 @@ module OmniAuth
             end
 
             def self.locate(search_hash)
-              first(search_hash)
+              if self.columns.include?(:provider)
+                search_hash[:provider] = 'identity'
+              end
+
+              first(search_hash.symbolize_keys)
             end
           end
         end
